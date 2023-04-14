@@ -1,14 +1,13 @@
 CC = gcc
 CFLAGS = -g -m32 -Wall -Werror -pedantic -I.
 LDFLAGS = --shared
-#DEPS = .h
-OBJ = libHelloWorld.o
-BUILD = libHelloWorld.so
+OBJ = libConverter.o
+BUILD = libConverter.so
 
-libHelloWorld.so: $(OBJ)
+libConverter.so: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-%.o: %.c $(DEPS)
+%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 .PHONY: clean

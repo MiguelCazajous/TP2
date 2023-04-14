@@ -8,9 +8,8 @@ import aiohttp
 import json
 import sys
 
-
 libPath="lib"
-libName="libHelloWorld.so"
+libName="libConverter.so"
 apiUrlBase="https://financialmodelingprep.com/api/v3/quote/"
 symbols = [
             "BTCUSD",
@@ -53,7 +52,7 @@ async def apiRequestsList(apiKey):
             requests.append(asyncio.ensure_future(getResponse(session, apiUrl, apiKey)))
 
         responses = await asyncio.gather(*requests)
-        print(responses)
+        return responses
 
 
 def loadLibrary():
@@ -61,18 +60,31 @@ def loadLibrary():
         Loads a 32 bits library in C language.
     """
     path=os.path.join(libPath, libName)
-    libHelloWorld = ctypes.CDLL(path)
-    #libHelloWorld.helloWorld.argtypes = (ctypes.c_int,)
-    #libHelloWorld.factorial.restype = ctypes.c_ulonglong
-    libHelloWorld.hello_world()
+    libConverter = ctypes.CDLL(path)
+    return libConverter
+
+
+def processData(request, lib):
+    requestStr = json.dumps(request)
+    lib.parser.restype = ctypes.c_bool
+    lib.parser.argtypes = [ctypes.c_char_p, ctypes.c_size_t]
+    ret = lib.parser(requestStr.encode(), len(requestStr))
+    print(f'Return value: {ret}')
 
 
 def main():
     """
         Main function.
     """
-    loadLibrary()
-    asyncio.run(apiRequestsList(getApiKey()))
+    jsonRequest = []
+    jsonResponse = asyncio.run(apiRequestsList(getApiKey()))
+    for item in jsonResponse:
+        jsonItem = {}
+        jsonItem["symbol"] = item[0]["symbol"]
+        jsonItem["name"] = item[0]["name"]
+        jsonItem["price"] = item[0]["price"]
+        jsonRequest.append(jsonItem)
+    processData(jsonRequest, loadLibrary())
 
 
 if __name__ == "__main__":
