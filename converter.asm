@@ -27,8 +27,7 @@ converter:
         mov     ebp, esp            ; EBP = ESP
 
         fld     source_currency;    ; stack: source_currency
-        fld     convertion_factor   ; stack: convertion_factor, source_currency
-        fmulp   st1                 ; stack: convertion_factor * source_currency
+        fmul    convertion_factor   ; stack: source_currency * convertion_factor 
 
         pop     ebp
         ret
