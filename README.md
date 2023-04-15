@@ -29,6 +29,11 @@ La API REST elegida es financialmodelingprep, mediante un simple registro con un
 
 Más información: https://site.financialmodelingprep.com/developer/docs/
 
+Se hizo uso de la librería json-c para el manejo de archivos JSON dentro de nuestra librería. De esta forma podemos manipular de manera sencilla la información que viene
+desde la parte de frontend.
+
+Para más información: https://github.com/json-c/json-c
+
 Los datos enviados desde Python al código en C es en formato JSON string que es como el que se muestra a continuación
 
 <details>
