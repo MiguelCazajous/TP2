@@ -16,10 +16,6 @@ char BTCEUR[] = "BTCEUR";
 char ETHARS[] = "ETHARS";
 char ETHEUR[] = "ETHEUR";
 
-double product(double a, double b) {
-    return a*b;
-}
-
 const char* converter(char *json_str, size_t json_str_size)  {
     json_object* json_obj = json_tokener_parse(json_str);
     if (NULL != json_obj && json_str_size > 0 && json_str_size < MAX_LENGTH) {
