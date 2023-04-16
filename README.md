@@ -43,22 +43,18 @@ Los datos enviados desde Python al código en C es en formato JSON string que es
 [
   {
     "symbol": "BTCUSD",
-    "name": "Bitcoin USD",
     "price": 30424.96
   },
   {
     "symbol": "ETHUSD",
-    "name": "Ethereum USD",
     "price": 2020.1797
   },
   {
     "symbol": "USDARS",
-    "name": "USD/ARS",
     "price": 214.67
   },
   {
     "symbol": "USDEUR",
-    "name": "USD/EUR",
     "price": 0.9042
   }
 ]
@@ -75,32 +71,26 @@ La respuesta que el código C envía a Python con el resultado de los cálculos 
 [
   {
     "symbol": "BTCUSD",
-    "name": "Bitcoin USD",
     "price": 30424.96
   },
   {
     "symbol": "ETHUSD",
-    "name": "Ethereum USD",
     "price": 2020.1797
   },
   {
     "symbol": "BTCARG",
-    "name": "Bitcoin ARG",
     "price": "0.0"
   },
   {
     "symbol": "BTCEUR",
-    "name": "bitcoin EUR",
     "price": "0.0"
   },
   {
     "symbol": "ETHARG",
-    "name": "Ethereum ARG",
     "price": "0.0"
   },
   {
     "symbol": "ETHEUR",
-    "name": "Ethereum EUR",
     "price": "0.0"
   }
 ]

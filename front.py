@@ -64,12 +64,21 @@ def loadLibrary():
     return libConverter
 
 
+def showResult(result):
+    json_result = json.loads(result)
+    for item in json_result:
+        print(f'Convertion: {item}')
+
+
 def processData(request, lib):
     requestStr = json.dumps(request)
-    lib.parser.restype = ctypes.c_bool
-    lib.parser.argtypes = [ctypes.c_char_p, ctypes.c_size_t]
-    ret = lib.parser(requestStr.encode(), len(requestStr))
-    print(f'Return value: {ret}')
+    lib.converter.restype = ctypes.c_char_p
+    lib.converter.argtypes = [ctypes.c_char_p, ctypes.c_size_t]
+    ret = lib.converter(requestStr.encode(), len(requestStr))
+    if ret is None:
+        print('Convertion failed. Exiting\n')
+        exit(1)
+    showResult(ret)
 
 
 def main():
@@ -81,7 +90,6 @@ def main():
     for item in jsonResponse:
         jsonItem = {}
         jsonItem["symbol"] = item[0]["symbol"]
-        jsonItem["name"] = item[0]["name"]
         jsonItem["price"] = item[0]["price"]
         jsonRequest.append(jsonItem)
     processData(jsonRequest, loadLibrary())
