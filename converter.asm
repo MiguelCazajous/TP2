@@ -4,7 +4,7 @@
 ; convierte un valor double de origen (USD) a un valor double de destino (ARS o EUR). 
 ;
 ; C prototype:
-;   int converter( double source_currency, double convertion_factor)
+;   double converter( double source_currency, double convertion_factor)
 ; Parameters:
 ;   source_currency   - valor de criptomoneda en USD
 ;   convertion_factor - factor de conversión
